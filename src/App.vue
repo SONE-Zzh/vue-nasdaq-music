@@ -1,22 +1,42 @@
 <template>
   <div id="app">
-    <router-view/>
+    <div id="header">
+      <img src="./assets/image/rz.png">
+      <div id="nav-main">
+        <img src="./assets/image/t_actionbar_music_normal.png">
+        <img src="./assets/image/t_actionbar_discover_selected.png">
+        <img src="./assets/image/t_actionbar_video_normal.png">
+      </div>
+      <img src="./assets/image/sj.png">
+    </div>
+    <router-view></router-view>
   </div>
 </template>
 
 <style lang="stylus">
 #app
-  font-family 'Avenir', Helvetica, Arial, sans-serif
-  -webkit-font-smoothing antialiased
-  -moz-osx-font-smoothing grayscale
-  text-align center
-  color #2c3e50
-
-#nav
-  padding 30px
-  a
-    font-weight bold
-    color #2c3e50
-    &.router-link-exact-active
-      color #42b983
+  width 100vw
+  height 100vh
+#header
+  position relative
+  width 100%
+  height 120px
+  background: #D43C33;
+  &>img
+    position absolute
+    top 50%
+    transform translate(0, -50%)
+    height 60px
+    &:nth-of-type(1)
+      left 20px
+      ^[0]>img:nth-of-type(2)
+        right 20px
+#nav-main
+  position absolute
+  top 50%
+  left 50%
+  transform translate(-50%, -50%)
+  height 90px
+  &>img
+    height 90px
 </style>

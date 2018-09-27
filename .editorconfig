@@ -1,4 +1,5 @@
 root=true
+[src/**.{js,vue,styl}]
 indent_style=space    #设置缩进风格(tab是硬缩进，space为软缩进)
 indent_size=2     #用一个整数定义的列数来设置缩进的宽度，如果indent_style为tab，则此属性默认为tab_width
 #tab_width=2       #用一个整数来设置tab缩进的列数。默认是indent_size

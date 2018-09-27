@@ -5,4 +5,5 @@ document.addEventListener("DOMContentLoaded", ev => {
   e.stopPropagation();
   document.getElementsByTagName("html")[0].style.fontSize = window.innerWidth / 10 + "px";
   meta.setAttribute("content", "width=device-width,initial-scale=" + 1 / dpr);
+  document.body.setAttribute("font-size", 16 * dpr + "px");
 });

@@ -18,7 +18,7 @@ export default {
   beforeRouteEnter(to, from, next) {
     next(vm => {
       vm.$emit("componentChange", to.fullPath);
-    })
+    });
   }
 };
 </script>

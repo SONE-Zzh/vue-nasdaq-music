@@ -1,15 +1,15 @@
 <template>
   <div id="app">
     <div id="header">
-      <img src="./assets/image/rz.png">
-      <div id="nav-main">
-        <img src="./assets/image/t_actionbar_music_normal.png">
-        <img src="./assets/image/t_actionbar_discover_selected.png">
-        <img src="./assets/image/t_actionbar_video_normal.png">
-      </div>
-      <img src="./assets/image/sj.png">
+    <img src="./assets/image/rz.png">
+    <div id="nav-main">
+      <img src="./assets/image/t_actionbar_music_normal.png">
+      <img src="./assets/image/t_actionbar_discover_selected.png">
+      <img src="./assets/image/t_actionbar_video_normal.png">
     </div>
-    <router-view></router-view>
+    <img src="./assets/image/sj.png">
+  </div>
+  <router-view></router-view>
   </div>
 </template>
 
@@ -23,6 +23,7 @@
   width 100%
   height 120px
   background: #D43C33;
+  z-index 99
   &>img
     position absolute
     top 50%

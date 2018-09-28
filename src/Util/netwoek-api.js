@@ -1,3 +1,5 @@
+let apiSrc = "http://localhost:3000";
 export default {
-  banner: "http://localhost:3000" + "/banner"
+  banner: apiSrc + "/banner",
+  personalized: apiSrc + "/personalized?limit=6"
 };

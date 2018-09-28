@@ -7,7 +7,8 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    bannerImgsrc: []
+    bannerImgsrc: [],
+    personalized: []
   },
   mutations: {
     setBannerImgsrc(state, payload) {
@@ -15,7 +16,16 @@ export default new Vuex.Store({
       payload.data.banners.forEach(ele => {
         ImgSrc.push(ele);
       });
+      // ImgSrc.push(ImgSrc[0]);
+      // ImgSrc.unshift(ImgSrc[ImgSrc.length - 1]);
       state.bannerImgsrc = ImgSrc;
+    },
+    setPersonalized(state, payload) {
+      let songList = [];
+      payload.data.result.forEach(ele => {
+        songList.push(ele);
+      });
+      state.personalized = songList;
     }
   },
   actions: {
@@ -24,6 +34,16 @@ export default new Vuex.Store({
         .get(networkApi.banner)
         .then(res => {
           commit("setBannerImgsrc", res);
+        })
+        .catch(err => {
+          throw err;
+        });
+    },
+    getPersonalized({ commit }) {
+      axios
+        .get(networkApi.personalized)
+        .then(res => {
+          commit("setPersonalized", res);
         })
         .catch(err => {
           throw err;

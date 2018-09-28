@@ -1,12 +1,12 @@
 <template>
   <div id="commend-banner">
-    <ul id="banner" @touch="stop()">
+    <ul id="banner" :class="{transition: isTransition}" @touchstart.stop="stop" @touchend.stop="autoPlay">
       <li v-for="(data, index) in bannerImgSrc" :key="index">
         <img :src="data.picUrl">
       </li>
     </ul>
     <ul id="dot-list">
-      <li v-for="num in bannerImgSrc.length" :key="num" @click="dotClick(num - 1);"></li>
+      <li v-for="num in bannerImgSrc.length" :key="num" :class="{active: dotClass[num - 1]}" @click="dotClick(num - 1);"></li>
     </ul>
   </div>
 </template>
@@ -18,7 +18,8 @@ export default {
     return {
       mark: 0,
       timer: null,
-      moveTime: 8000
+      moveTime: 6000,
+      isTransition: true
     };
   },
   computed: {
@@ -38,7 +39,14 @@ export default {
       return parseInt(getComputedStyle(this.bannerBox).left);
     },
     dotClass() {
-      return []
+      return Array.apply(null, Array(this.bannerImgSrc.length)).map(
+        (value, index) => {
+          if (this.mark === index) {
+            return true;
+          }
+          return false;
+        }
+      );
     }
   },
   mounted() {
@@ -50,6 +58,7 @@ export default {
   methods: {
     autoPlay() {
       this.timer = setInterval(() => {
+        this.mark++;
         if (this.mark > 7) {
           this.mark = 0;
         }
@@ -59,17 +68,14 @@ export default {
     play() {
       this.bannerBox.style.left =
         this.left + this.moveWidth * -this.mark + "px";
-      this.mark++;
     },
     stop() {
       clearInterval(this.timer);
-      console.log(this.timer);
     },
     dotClick(index) {
       if (this.mark === index) return;
       this.mark = index;
       this.play();
-      console.log(index);
     }
   }
 };
@@ -78,17 +84,17 @@ export default {
 #commend-banner
   position relative
   width 100%
-  height 400px
+  height 337px
   overflow hidden
   background linear-gradient(to bottom,#D43C33 70%,#fff 0)
   #banner
     position absolute
     top 0
-    left 0
+    bottom 0
     padding 0
+    margin 0
     width calc(8 * 10rem)
     overflow hidden
-    transition all .5s linear
     &>li
       float left
       list-style none
@@ -97,12 +103,15 @@ export default {
         display block
         margin auto
         border-radius 10px
+#banner.transition
+  transition all .2s linear
 #dot-list
   position absolute
-  bottom 0
+  bottom 5px
   left 50%
-  transform translate(0,-50%)
+  transform translate(-50%,0)
   padding 0
+  margin 0
   &>li
     display inline-block
     margin 0 5px
@@ -111,4 +120,7 @@ export default {
     list-style-type none
     border-radius 50%
     background rgba(0,0,0,.4)
+    &.active
+      background rgba(255,255,255,.7)
+
 </style>

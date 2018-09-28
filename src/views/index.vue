@@ -16,7 +16,7 @@ export default {
   components: {
     recommend
   }
-}
+};
 </script>
 <style lang="stylus">
 #index
@@ -25,8 +25,12 @@ export default {
   left 0
   right 0
   bottom 100px
+  padding-top 40px
   #index-nav
+    position fixed
+    top 120px
     display flex
+    width 10rem
     justify-content space-around
     background #D43C33
     a
@@ -34,4 +38,3 @@ export default {
       color #ffffff
       text-decoration none
 </style>
-

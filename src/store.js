@@ -2,10 +2,14 @@ import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
 import networkApi from "./Util/netwoek-api.js";
+import songListDetailState from "./stateModule/songListDetailStateModule.js";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+  modules: {
+    songListDetailState
+  },
   state: {
     bannerImgsrc: [],
     personalized: []

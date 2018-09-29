@@ -14,54 +14,73 @@
         <span v-if="routers[2] === toRouter" class="active"></span>
       </router-link>
     </div>
-    <router-view @componentChange="componentChange"></router-view>
+    <router-view @componentChange="componentChange" @songListDetails="songListDetails"></router-view>
+    <songListDetail v-if="songListDetail.show"></songListDetail>
   </div>
 </template>
 
 <script>
+import songListDetail from "../components/songListDetail.vue";
+import { mapMutations, mapActions } from "vuex";
 export default {
   name: "index",
   data() {
     return {
       toRouter: "",
       routers: ["/index/recommend", "/index/friend", "/index/radio"],
-      startX: 0,
-      startY: 0,
-      endX: 0,
-      endY: 0
+      banner: {
+        startX: 0,
+        startY: 0,
+        endX: 0,
+        endY: 0
+      },
+      songListDetail: {
+        show: false
+      }
     }
+  },
+  components: {
+    songListDetail
   },
   computed: {
     routerCurrent() {
       return this.$router.history.current.path;
+    },
+    songListState() {
+      return this.$store.state.songListState;
     }
   },
   methods: {
+    ...mapActions("songListDetailState", ["getSongState"]),
+    songListDetails(data) {
+      this.songListDetail.show = true;
+      this.getSongState(data);
+    },
     toTouchstart(ev) {
      var thefinger = ev.touches[0];
-     this.startX = thefinger.clientX;
-     this.startY = thefinger.clientY;
+     this.banner.startX = thefinger.clientX;
+     this.banner.startY = thefinger.clientY;
     },
     toTouchmove(ev) {
       //获取手指
       var thefinger = ev.touches[0];
-      this.endX = thefinger.clientX;
-      this.endY = thefinger.clientY;
+      this.banner.endX = thefinger.clientX;
+      this.banner.endY = thefinger.clientY;
     },
     toTouchend() {
       let current = this.$router.history.current.path;
-      if (Math.abs(this.startY - this.endY) > 100){
+      if (Math.abs(this.banner.startY - this.banner.endY) > 100){
         return;
       }
-      if (this.startX > this.endX && current === "/index/recommend") {
+      if (this.banner.startX > this.banner.endX && current === "/index/recommend") {
         this.$router.push("/index/radio");
-      } else if(this.startX < this.endX && current === "/index/radio") {
+      } else if(this.banner.startX < this.banner.endX && current === "/index/radio") {
         this.$router.push("/index/recommend");
       }
-      this.startX = 0;
-      this.startY = 0;
-      this.endX = 0;
-      this.endy = 0;
+      this.banner.startX = 0;
+      this.banner.startY = 0;
+      this.banner.endX = 0;
+      this.banner.endy = 0;
     },
     componentChange(value) {
       //子组件传值渲染

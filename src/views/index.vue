@@ -15,7 +15,7 @@
       </router-link>
     </div>
     <router-view @componentChange="componentChange" @songListDetails="songListDetails"></router-view>
-    <songListDetail v-if="songListDetail.show"></songListDetail>
+    <songListDetail v-if="songListDetail.show" @close="songListDetailClose" :songListItem="songListItem" :detail="songListDetail.msg"></songListDetail>
   </div>
 </template>
 
@@ -35,7 +35,12 @@ export default {
         endY: 0
       },
       songListDetail: {
-        show: false
+        //歌单详情显示与否
+        show: false,
+        msg: {
+          pandect: [],
+          state: null
+        }
       }
     };
   },
@@ -46,15 +51,21 @@ export default {
     routerCurrent() {
       return this.$router.history.current.path;
     },
-    songListState() {
-      return this.$store.state.songListState;
+    songListItem() {
+      //命名空间中的state
+      return this.$store.state.songListDetailState.songListState;
     }
   },
   methods: {
     ...mapActions("songListDetailState", ["getSongState"]),
     songListDetails(data) {
       this.songListDetail.show = true;
-      this.getSongState(data);
+      //获取promise对象来判断什么时候渲染歌单列表
+      this.songListDetail.state = this.getSongState(data);
+      this.songListDetail.pandect = data;
+    },
+    songListDetailClose() {
+      this.songListDetail.show = false;
     },
     toTouchstart(ev) {
       var thefinger = ev.touches[0];
@@ -73,13 +84,13 @@ export default {
         return;
       }
       if (
-        Math.abs(this.banner.startX - this.banner.endX) >
+        this.banner.startX - this.banner.endX >
           window.innerWidth / 3 &&
         current === "/index/recommend"
       ) {
         this.$router.push("/index/radio");
       } else if (
-        Math.abs(this.banner.startX - this.banner.endX) >
+        this.banner.endX - this.banner.startX >
           window.innerWidth / 3 &&
         current === "/index/radio"
       ) {

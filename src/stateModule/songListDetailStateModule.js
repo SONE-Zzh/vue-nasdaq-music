@@ -13,15 +13,18 @@ export default {
   },
   actions: {
     getSongState({ commit }, payload) {
-      axios
-        .get(networkApi.playlistDetail + "?id=" + payload.id)
-        .then(res => {
-          // console.log(res.data);
-          commit("setSongState", res.data);
-        })
-        .catch(err => {
-          throw err;
-        });
+      return new Promise(function(resolve, reject) {
+        axios
+          .get(networkApi.playlistDetail + "?id=" + payload.id)
+          .then(res => {
+            console.log(res.data);
+            commit("setSongState", res.data);
+            resolve();
+          })
+          .catch(err => {
+            throw err;
+          });
+      });
     }
   }
 };

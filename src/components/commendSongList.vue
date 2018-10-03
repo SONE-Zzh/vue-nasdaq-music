@@ -81,8 +81,8 @@ export default {
         padding 10px 0
         font-size 25px
         width 100%
-        height 30%
-        letter-spacing 2px
+        height 25%
+        letter-spacing 1px
         display:-webkit-box;
         -webkit-box-orient:vertical;
         -webkit-line-clamp:2;

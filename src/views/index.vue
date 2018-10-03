@@ -37,7 +37,7 @@ export default {
       songListDetail: {
         show: false
       }
-    }
+    };
   },
   components: {
     songListDetail
@@ -57,9 +57,9 @@ export default {
       this.getSongState(data);
     },
     toTouchstart(ev) {
-     var thefinger = ev.touches[0];
-     this.banner.startX = thefinger.clientX;
-     this.banner.startY = thefinger.clientY;
+      var thefinger = ev.touches[0];
+      this.banner.startX = thefinger.clientX;
+      this.banner.startY = thefinger.clientY;
     },
     toTouchmove(ev) {
       //获取手指
@@ -69,12 +69,20 @@ export default {
     },
     toTouchend() {
       let current = this.$router.history.current.path;
-      if (Math.abs(this.banner.startY - this.banner.endY) > 100){
+      if (Math.abs(this.banner.startY - this.banner.endY) > 100) {
         return;
       }
-      if (this.banner.startX > this.banner.endX && current === "/index/recommend") {
+      if (
+        Math.abs(this.banner.startX - this.banner.endX) >
+          window.innerWidth / 3 &&
+        current === "/index/recommend"
+      ) {
         this.$router.push("/index/radio");
-      } else if(this.banner.startX < this.banner.endX && current === "/index/radio") {
+      } else if (
+        Math.abs(this.banner.startX - this.banner.endX) >
+          window.innerWidth / 3 &&
+        current === "/index/radio"
+      ) {
         this.$router.push("/index/recommend");
       }
       this.banner.startX = 0;

@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import ListTitle from "./SongListTitle.vue";
+import ListTitle from "./songListTitle.vue";
 export default {
   data() {
     return {
@@ -17,6 +17,5 @@ export default {
   components: {
     ListTitle
   }
-}
+};
 </script>
-

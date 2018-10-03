@@ -16,7 +16,7 @@
   </div>
 </template>
 <script>
-import ListTitle from "./SongListTitle.vue";
+import ListTitle from "./songListTitle.vue";
 export default {
   data() {
     return {
@@ -36,8 +36,8 @@ export default {
     playCount() {
       return this.songList.map(value => {
         let playCount = Math.floor(value.playCount).toString();
-        return playCount.length > 5 ? playCount.slice(0,-4) + "万" : playCount;
-      })
+        return playCount.length > 5 ? playCount.slice(0, -4) + "万" : playCount;
+      });
     }
   },
   mounted() {

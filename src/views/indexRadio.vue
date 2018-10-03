@@ -10,6 +10,5 @@ export default {
       vm.$emit("componentChange", to.fullPath);
     });
   }
-}
+};
 </script>
-

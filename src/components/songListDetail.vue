@@ -8,8 +8,8 @@
 </template>
 <script>
 export default {
-  name: "songListDetail",
-}
+  name: "songListDetail"
+};
 </script>
 <style lang="stylus">
 #song-list-detail

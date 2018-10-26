@@ -9,7 +9,7 @@
         <li></li>
       </ul>
     </div>
-    <div id="detail-content">
+    <div id="detail-content" v-if="songListItem.playlist">
       <div id="search">
         <div id="search-fake">
           <img src="../assets/image/a7j.png">
@@ -17,7 +17,22 @@
         </div>
       </div>
       <div id="detail-head">
-        
+        <div class="detail-layout">
+          <div class="detail-layout-img">
+            <img :src="songListItem.playlist.coverImgUrl">
+            <span id="play-count">
+              <img src="../assets/image/a8t.png">
+              <span>{{ playCount }}</span>
+            </span>
+            <span id="msg">
+              
+            </span>
+          </div>
+          <div class="detail-layout-font">
+            <h4>{{songListItem.playlist.name}}</h4>
+          </div>
+        </div>
+        <div class="head-options"></div>
       </div>
       <div id="detail-body">
         
@@ -28,7 +43,13 @@
 <script>
 export default {
   name: "songListDetail",
-  props: ["songListItem", "detail"]
+  props: ["songListItem", "detail"],
+  computed: {
+    playCount() {
+      let playCount = Math.floor(this.songListItem.playlist.playCount).toString();
+      return playCount.length > 5 ? playCount.slice(0, -4) + "万" : playCount;
+    }
+  }
 };
 </script>
 <style lang="stylus">
@@ -38,6 +59,7 @@ export default {
   width 100vw
   height 100vh
   z-index 999
+  background #282C34
   #detail-title
     display flex
     align-items center
@@ -45,8 +67,8 @@ export default {
     top 0
     width 100%
     height 80px
-    background #282C34
     z-index 999
+    background #282C34
     span,ul
       display inline-block
       position absolute 
@@ -73,7 +95,7 @@ export default {
       font-size 32px
       letter-spacing 5px
       height 50px
-      margin -3px 0 0 0
+      margin 0
       line-height 50px
     #menu
       top 50%
@@ -117,6 +139,36 @@ export default {
         color rgba(255,255,255,.3)
         font-size 27px
         margin-left 20px
+  #detail-head
+    padding 30px
+    box-sizing border-box
+    .detail-layout
+      display flex
+      width 100%
+      color #fff
+      &-img 
+        position relative
+        width 60%
+        img 
+          width 100%
+        #play-count
+          display flex
+          position absolute
+          top 2px
+          right 10px
+          align-items center
+          color #ffffff
+          img
+            width 22px
+            margin-right 4px
+          span 
+            font-size 25px 
+      &-font 
+        font-size 35px
+        margin-left 30px
+        font-family '宋体'
+        h4
+          margin 30px 0
 
 
 </style>

@@ -2,7 +2,7 @@
   <div id="commend-banner">
     <ul id="banner" :class="{transition: isTransition}" @touchstart.stop="stop" @touchend.stop="autoPlay">
       <li v-for="(data, index) in bannerImgSrc" :key="index">
-        <img :src="data.picUrl">
+        <img :src="data.imageUrl">
       </li>
     </ul>
     <ul id="dot-list">
@@ -84,7 +84,7 @@ export default {
 #commend-banner
   position relative
   width 100%
-  height 337px
+  height 262px
   overflow hidden
   background linear-gradient(to bottom,#D43C33 70%,#fff 0)
   #banner
@@ -103,6 +103,7 @@ export default {
         display block
         margin auto
         border-radius 10px
+        width 94%
 #banner.transition
   transition all .2s linear
 #dot-list

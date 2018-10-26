@@ -8,7 +8,7 @@ export default {
   },
   mutations: {
     setSongState(state, payload) {
-      state.songListState = payload.playlist;
+      state.songListState = payload;
     }
   },
   actions: {

@@ -23,6 +23,7 @@ export default new Vuex.Store({
       // ImgSrc.push(ImgSrc[0]);
       // ImgSrc.unshift(ImgSrc[ImgSrc.length - 1]);
       state.bannerImgsrc = ImgSrc;
+      console.log(ImgSrc);
     },
     setPersonalized(state, payload) {
       let songList = [];

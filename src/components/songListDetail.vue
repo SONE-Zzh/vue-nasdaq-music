@@ -10,8 +10,14 @@
       </ul>
     </div>
     <div id="detail-content">
+      <div id="search">
+        <div id="search-fake">
+          <img src="../assets/image/a7j.png">
+          <span>搜索歌单内歌曲</span>
+        </div>
+      </div>
       <div id="detail-head">
-
+        
       </div>
       <div id="detail-body">
         
@@ -22,7 +28,7 @@
 <script>
 export default {
   name: "songListDetail",
-  props: ["songListItem", "detail"],
+  props: ["songListItem", "detail"]
 };
 </script>
 <style lang="stylus">
@@ -40,6 +46,7 @@ export default {
     width 100%
     height 80px
     background #282C34
+    z-index 999
     span,ul
       display inline-block
       position absolute 
@@ -69,9 +76,11 @@ export default {
       margin -3px 0 0 0
       line-height 50px
     #menu
-      top 0
+      top 50%
       right 35px
       padding 0
+      margin 0
+      transform translate(0, -50%)
       li
         width 8px
         height 8px
@@ -80,4 +89,34 @@ export default {
         float left
         margin 0 5px
         list-style-type none
+#detail-content
+  width 100%
+  height 600px
+  background #282C34
+  &>div
+    padding 0 35px
+    box-sizing border-box
+  #search
+    height 80px
+    width 100%
+    #search-fake
+      position relative 
+      top 50%
+      transform translate(0,-50%)
+      width 100%
+      height 50px
+      line-height 42px
+      box-sizing border-box
+      background rgba(255,255,255,.1)
+      border-radius 35px
+      text-align center
+      img 
+        width 30px
+        vertical-align  middle
+      span 
+        color rgba(255,255,255,.3)
+        font-size 27px
+        margin-left 20px
+
+
 </style>

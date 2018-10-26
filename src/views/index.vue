@@ -21,7 +21,7 @@
 
 <script>
 import songListDetail from "../components/songListDetail.vue";
-import { mapMutations, mapActions } from "vuex";
+import { mapState, mapActions } from "vuex";
 export default {
   name: "index",
   data() {
@@ -51,10 +51,11 @@ export default {
     routerCurrent() {
       return this.$router.history.current.path;
     },
-    songListItem() {
-      //命名空间中的state
-      return this.$store.state.songListDetailState.songListState;
-    }
+    // songListItem() {
+    //   //命名空间中的state
+    //   return this.$store.state.songListDetailState.songListState;
+    // },
+    ...mapState("songListDetailState", { songListItem: "songListState" })
   },
   methods: {
     ...mapActions("songListDetailState", ["getSongState"]),
@@ -84,14 +85,12 @@ export default {
         return;
       }
       if (
-        this.banner.startX - this.banner.endX >
-          window.innerWidth / 3 &&
+        this.banner.startX - this.banner.endX > window.innerWidth / 3 &&
         current === "/index/recommend"
       ) {
         this.$router.push("/index/radio");
       } else if (
-        this.banner.endX - this.banner.startX >
-          window.innerWidth / 3 &&
+        this.banner.endX - this.banner.startX > window.innerWidth / 3 &&
         current === "/index/radio"
       ) {
         this.$router.push("/index/recommend");
